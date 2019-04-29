@@ -7,21 +7,15 @@ import mergeInjections from '../injections/mergeInjections';
 
 const ensembleInjections = action => {
   let base = null;
-  switch (true) {
-    case action.external:
-      base = externalBaseAction(action);
-      break;
-    case !action.type:
-      base = singleCallThunkAction(action);
-      break;
-    case action.target:
-      base = baseThunkAction(action);
-      break;
-    default:
-      base = emptyThunkAction(action);
-      break;
+  if (action.external) {
+    base = externalBaseAction(action);
+  } else if (!action.type) {
+    base = singleCallThunkAction(action);
+  } else if (action.target) {
+    base = baseThunkAction(action);
+  } else {
+    base = emptyThunkAction(action);
   }
-
   if (!action.injections) {
     return base;
   }
