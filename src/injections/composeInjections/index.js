@@ -4,14 +4,14 @@ function composeInjections(...injections) {
   const injectionsDescription = mergeInjections(injections);
 
   const {
-    prebehavior = () => {},
-    apiCall = () => {},
+    prebehavior = () => {}, // eslint-disable-line no-empty-function
+    apiCall = () => {}, // eslint-disable-line no-empty-function
     determination = () => true,
     success = () => true,
-    postSuccess = () => {},
-    postBehavior = () => {},
-    postFailure = () => {},
-    failure = () => {},
+    postSuccess = () => {}, // eslint-disable-line no-empty-function
+    postBehavior = () => {}, // eslint-disable-line no-empty-function
+    postFailure = () => {}, // eslint-disable-line no-empty-function
+    failure = () => {}, // eslint-disable-line no-empty-function
     statusHandler = () => true
   } = injectionsDescription;
 
@@ -21,7 +21,9 @@ function composeInjections(...injections) {
     postBehavior(dispatch, response);
     if (determination(response)) {
       const shouldContinue = success(dispatch, response, getState());
-      if (shouldContinue) postSuccess(dispatch, response, getState());
+      if (shouldContinue) {
+        postSuccess(dispatch, response, getState());
+      }
     } else {
       const shouldContinue = statusHandler(dispatch, response, getState());
       if (shouldContinue) {

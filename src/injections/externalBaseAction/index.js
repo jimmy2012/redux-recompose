@@ -1,7 +1,7 @@
 function externalBaseAction({
   target,
   service,
-  payload = () => {},
+  payload = () => {}, // eslint-disable-line no-empty-function
   successSelector = response => response.data,
   failureSelector = response => response.problem,
   external: $
@@ -10,12 +10,11 @@ function externalBaseAction({
 
   return {
     prebehavior: dispatch => dispatch({ type: $.LOADING, target }),
-    apiCall: async getState => service(selector(getState())),
+    apiCall: getState => service(selector(getState())),
     determination: response => response.ok,
     success: (dispatch, response) =>
       dispatch({ type: $.SUCCESS, target, payload: successSelector(response) }),
-    failure: (dispatch, response) =>
-      dispatch({ type: $.FAILURE, target, payload: failureSelector(response) })
+    failure: (dispatch, response) => dispatch({ type: $.FAILURE, target, payload: failureSelector(response) })
   };
 }
 

@@ -41,6 +41,8 @@ describe('completeState', () => {
     expect(() => completeState({}, {})).toThrow(new Error('Expected an array of strings as ignored targets'));
   });
   it('Throws if ignored targets is not a pure string array', () => {
-    expect(() => completeState({}, ['1', {}])).toThrow(new Error('Expected an array of strings as ignored targets'));
+    expect(() => completeState({}, ['1', {}])).toThrow(
+      new Error('Expected an array of strings as ignored targets')
+    );
   });
 });

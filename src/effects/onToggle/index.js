@@ -5,7 +5,7 @@ function onToggle(selector = action => action.payload) {
     name: 'onToggle',
     realTarget: action => action.target,
     do: (action, state) =>
-      (selector(action, state) === undefined ? !state[action.target] : selector(action, state))
+      selector(action, state) === undefined ? !state[action.target] : selector(action, state)
   });
 }
 

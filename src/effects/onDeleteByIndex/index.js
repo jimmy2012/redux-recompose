@@ -9,9 +9,9 @@ function onDeleteByIndex(selector = action => action.payload) {
       return selectedIndex === -1
         ? state[`${action.target}`]
         : [
-          ...state[`${action.target}`].slice(0, selector(action, state)),
-          ...state[`${action.target}`].slice(selector(action, state) + 1)
-        ];
+            ...state[`${action.target}`].slice(0, selector(action, state)),
+            ...state[`${action.target}`].slice(selector(action, state) + 1)
+          ];
     }
   });
 }

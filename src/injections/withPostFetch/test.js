@@ -5,7 +5,8 @@ import withPostFetch from '.';
 
 const MockService = {
   fetchSomething: async () => new Promise(resolve => resolve({ ok: true, data: 42, ultraSecretData: 'rho' })),
-  fetchFailureNotFound: async () => new Promise(resolve => resolve({ ok: false, problem: 'CLIENT_ERROR', status: 404 }))
+  fetchFailureNotFound: async () =>
+    new Promise(resolve => resolve({ ok: false, problem: 'CLIENT_ERROR', status: 404 }))
 };
 
 const actions = createTypes(['FETCH', 'FETCH_SUCCESS', 'FETCH_FAILURE', 'FETCH_LOADING'], '@TEST');
@@ -18,7 +19,8 @@ describe('withPostFetch', () => {
       target: 'aTarget',
       service: MockService.fetchSomething,
       injections: withPostFetch((dispatch, response) =>
-        dispatch({ type: actions.FETCH_LOADING, payload: response.ultraSecretData }))
+        dispatch({ type: actions.FETCH_LOADING, payload: response.ultraSecretData })
+      )
     });
     const actionsDispatched = store.getActions();
     expect(actionsDispatched).toEqual([

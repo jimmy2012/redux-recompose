@@ -10,7 +10,7 @@ function createReducer(initialState, descriptor) {
     if (!handler && !action.type) {
       console.warn(`Handling an action without type: ${JSON.stringify(action)}`);
     }
-    return (handler && handler(state, action)) || state;
+    return (handler && handler(state, action)) || state; // eslint-disable-line no-extra-parens
   };
 }
 

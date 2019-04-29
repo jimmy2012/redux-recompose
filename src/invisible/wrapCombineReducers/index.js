@@ -13,24 +13,25 @@ const getSliceName = (action, reducerObject) => {
     .replace('#', '')
     .toLowerCase();
   Object.keys(reducerObject).forEach(reducerName => {
-    if (reducerName.toLowerCase() === sliceName) sliceName = reducerName;
+    if (reducerName.toLowerCase() === sliceName) {
+      sliceName = reducerName;
+    }
   });
   return sliceName;
 };
 
 const formatActionName = actionName => actionName.slice(actionName.indexOf('/') + 1);
 
-function wrapCombineReducers(CR, invisibleReducer = commonReducer) {
+function wrapCombineReducers(cr, invisibleReducer = commonReducer) {
   function combineReducers(reducerObject) {
     return (state = {}, action) => {
-      if (!shouldBeExtended(action)) return CR(reducerObject)(state, action);
+      if (!shouldBeExtended(action)) {
+        return cr(reducerObject)(state, action);
+      }
       const slice = getSliceName(action, reducerObject);
       return {
         ...state,
-        [slice]: invisibleReducer(
-          state[slice],
-          { ...action, type: formatActionName(action.type) }
-        )
+        [slice]: invisibleReducer(state[slice], { ...action, type: formatActionName(action.type) })
       };
     };
   }

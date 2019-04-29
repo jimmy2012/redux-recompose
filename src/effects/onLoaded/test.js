@@ -1,9 +1,9 @@
 import Immutable from 'seamless-immutable';
 
 import createReducer from '../../creators/createReducer';
+import onLoading from '../onLoading';
 
 import onLoaded from '.';
-import onLoading from '../onLoading';
 
 const initialState = {
   target: null,

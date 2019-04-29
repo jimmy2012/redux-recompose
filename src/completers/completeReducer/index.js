@@ -1,20 +1,21 @@
 import onLoading from '../../effects/onLoading';
 import onSuccess from '../../effects/onSuccess';
 import onFailure from '../../effects/onFailure';
-
 import onSubscribe from '../../effects/onSubscribe';
 import onUnsubscribe from '../../effects/onUnsubscribe';
-
 import { isStringArray, isValidObject } from '../../utils/typeUtils';
 
 // Given a reducer description, it returns a reducerHandler with all success and failure cases
+// eslint-disable-next-line complexity
 function completeReducer(reducerDescription) {
   if (
     !reducerDescription ||
-    ((!reducerDescription.primaryActions || !reducerDescription.primaryActions.length) &&
-    (!reducerDescription.modalActions || !reducerDescription.modalActions.length))
+    ((!reducerDescription.primaryActions || !reducerDescription.primaryActions.length) && // eslint-disable-line no-extra-parens
+      (!reducerDescription.modalActions || !reducerDescription.modalActions.length))
   ) {
-    throw new Error('Reducer description is incomplete, should contain at least an actions field to complete');
+    throw new Error(
+      'Reducer description is incomplete, should contain at least an actions field to complete'
+    );
   }
 
   let reducerHandler = {};

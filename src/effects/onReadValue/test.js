@@ -22,7 +22,11 @@ describe('onReadValue', () => {
     const reducer = createReducer(setUp.state, {
       '@@ACTION/TYPE': onReadValue()
     });
-    const newState = reducer(setUp.state, { type: '@@ACTION/TYPE', payload: 'An elephant', target: 'aTarget' });
+    const newState = reducer(setUp.state, {
+      type: '@@ACTION/TYPE',
+      payload: 'An elephant',
+      target: 'aTarget'
+    });
     expect(newState.aTarget).toBe('An elephant');
   });
 
@@ -31,9 +35,17 @@ describe('onReadValue', () => {
       '@@ACTION/ELEPHUN': onReadValue(action => action.payload.elephantCount),
       '@@ACTION/ELECOUNT': onReadValue((action, state) => action.payload.elephantCount + state.count)
     });
-    let newState = reducer(setUp.state, { type: '@@ACTION/ELEPHUN', payload: { elephantCount: 3 }, target: 'aTarget' });
+    let newState = reducer(setUp.state, {
+      type: '@@ACTION/ELEPHUN',
+      payload: { elephantCount: 3 },
+      target: 'aTarget'
+    });
     expect(newState.aTarget).toBe(3);
-    newState = reducer(newState, { type: '@@ACTION/ELECOUNT', payload: { elephantCount: 5 }, target: 'count' });
+    newState = reducer(newState, {
+      type: '@@ACTION/ELECOUNT',
+      payload: { elephantCount: 5 },
+      target: 'count'
+    });
     expect(newState.count).toBe(6);
     expect(newState.aTarget).toBe(3);
   });

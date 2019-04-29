@@ -1,11 +1,12 @@
 module.exports = {
-    "extends": "airbnb-base",
-    "env": {
-      "jest": true
-    },
-    "rules": {
-      "comma-dangle": ["error", "never"],
-      "no-console": ["error", {"allow": ["warn", "error"]}],
-      "arrow-parens": ["off", { "requireForBlockBody": false }]
-    }
+  extends: ['wolox-react'],
+  rules: {
+    'import/no-unresolved': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'prefer-object-spread' : 'on',
+    'no-async-promise-executor': 'on',
+    'no-misleading-character-class': 'on',
+    'require-atomic-updates' : 'on',
+    'max-classes-per-file' : 'on'
+  }
 };

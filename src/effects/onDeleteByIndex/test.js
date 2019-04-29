@@ -39,7 +39,11 @@ describe('onDeleteByIndex', () => {
     const reducer = createReducer(setUp.state, {
       '@@ACTION/DELETE': onDeleteByIndex(action => action.payload.index)
     });
-    const newState = reducer(setUp.state, { type: '@@ACTION/DELETE', payload: { index: 3 }, target: 'aTarget' });
+    const newState = reducer(setUp.state, {
+      type: '@@ACTION/DELETE',
+      payload: { index: 3 },
+      target: 'aTarget'
+    });
     expect(newState.aTarget).toEqual([1, 2, 4, 1]);
   });
   it('Is secure for -1 value', () => {
@@ -48,7 +52,11 @@ describe('onDeleteByIndex', () => {
     });
     // A missing value, wrongCalculatedIndexUseOnDeleteInstead will be -1
     const wrongCalculatedIndexUseOnDeleteInstead = setUp.state.aTarget.indexOf(5);
-    const newState = reducer(setUp.state, { type: '@@ACTION/DELETE', payload: wrongCalculatedIndexUseOnDeleteInstead, target: 'aTarget' });
+    const newState = reducer(setUp.state, {
+      type: '@@ACTION/DELETE',
+      payload: wrongCalculatedIndexUseOnDeleteInstead,
+      target: 'aTarget'
+    });
     expect(newState.aTarget).toEqual(setUp.state.aTarget);
   });
 });

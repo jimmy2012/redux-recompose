@@ -1,7 +1,7 @@
 import completeTypes from '.';
 
 describe('completeTypes', () => {
-  it('Completes from an array\'s element', () => {
+  it("Completes from an array's element", () => {
     const arrTypes = ['AN_ACTION'];
     expect(completeTypes(arrTypes)).toEqual(['AN_ACTION', 'AN_ACTION_SUCCESS', 'AN_ACTION_FAILURE']);
   });
@@ -31,6 +31,8 @@ describe('completeTypes', () => {
   });
   it('Throws if parameters are not string lists', () => {
     expect(() => completeTypes(null)).toThrow(new Error('Types must be an array of strings'));
-    expect(() => completeTypes(['ONE'], null)).toThrow(new Error('Exception cases from actions must be an array of strings'));
+    expect(() => completeTypes(['ONE'], null)).toThrow(
+      new Error('Exception cases from actions must be an array of strings')
+    );
   });
 });

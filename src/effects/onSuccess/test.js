@@ -23,7 +23,11 @@ describe('onSuccess', () => {
     const reducer = createReducer(setUp.state, {
       '@@ACTION/TYPE': onSuccess()
     });
-    const newState = reducer(setUp.state, { type: '@@ACTION/TYPE', target: 'target', payload: 'Success Payload' });
+    const newState = reducer(setUp.state, {
+      type: '@@ACTION/TYPE',
+      target: 'target',
+      payload: 'Success Payload'
+    });
     expect(newState).toEqual({
       target: 'Success Payload',
       targetLoading: false,

@@ -11,7 +11,8 @@ const MockService = {
   fetchSomething: async () => new Promise(resolve => resolve({ ok: true, data: 30 })),
   fetchSomethingForSelector: async () => new Promise(resolve => resolve({ ok: true, data: 40 })),
   fetchFailure: async () => new Promise(resolve => resolve({ ok: false, problem: 'CLIENT_ERROR' })),
-  fetchFailureForSelector: async () => new Promise(resolve => resolve({ ok: false, error: 'NEW_CLIENT_ERROR' }))
+  fetchFailureForSelector: async () =>
+    new Promise(resolve => resolve({ ok: false, error: 'NEW_CLIENT_ERROR' }))
 };
 
 const setUp = {
@@ -24,10 +25,7 @@ const configureStore = invisibleReducer => {
     dummy: (state = {}) => state
   };
   const ownCombineReducers = wrapCombineReducers(combineReducers, invisibleReducer);
-  return createStore(
-    ownCombineReducers(reducersObject),
-    compose(applyMiddleware(thunk, fetchMiddleware))
-  );
+  return createStore(ownCombineReducers(reducersObject), compose(applyMiddleware(thunk, fetchMiddleware)));
 };
 
 beforeEach(() => {
@@ -49,8 +47,9 @@ describe('wrapService', () => {
     });
   });
   it('Does allow custom injections', async () => {
-    MockService.fetchSomethingForSelector.injections =
-      [withPostSuccess((_, response) => expect(response).toEqual({ ok: true, data: 40 }))];
+    MockService.fetchSomethingForSelector.injections = [
+      withPostSuccess((_, response) => expect(response).toEqual({ ok: true, data: 40 }))
+    ];
     const ServiceActions = wrapService(MockService, 'foo', { fetchSomethingForSelector: 'fetchSomething' });
     await setUp.store.dispatch(ServiceActions.fetchSomethingForSelector());
     expect(setUp.store.getState()).toEqual({

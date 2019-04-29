@@ -3,9 +3,8 @@ import validate from '../validate';
 function onDelete(leftSelector, rightSelector, filter) {
   const safeLeftSelector = leftSelector || (action => action.payload);
   const safeRightSelector = rightSelector || (item => item.id);
-  const safeFilter = filter || (
-    (item, action) => safeLeftSelector(action, item) !== safeRightSelector(item, action)
-  );
+  const safeFilter =
+    filter || ((item, action) => safeLeftSelector(action, item) !== safeRightSelector(item, action));
 
   return validate({
     name: 'onDelete',

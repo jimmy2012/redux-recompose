@@ -24,16 +24,22 @@ beforeEach(() => {
 
 describe('completeReducer', () => {
   it('Throws if a reducer description is not present', () => {
-    expect(() => completeReducer(null)).toThrow(new Error('Reducer description is incomplete, should contain at least an actions field to complete'));
+    expect(() => completeReducer(null)).toThrow(
+      new Error('Reducer description is incomplete, should contain at least an actions field to complete')
+    );
   });
   it('Throws if a reducer description has not a primaryActions field', () => {
-    expect(() => completeReducer({ a: 1 })).toThrow(new Error('Reducer description is incomplete, should contain at least an actions field to complete'));
+    expect(() => completeReducer({ a: 1 })).toThrow(
+      new Error('Reducer description is incomplete, should contain at least an actions field to complete')
+    );
   });
   it('Throws if primary actions is not an array of strings', () => {
     const reducerDescription = {
       primaryActions: [null, 'thing']
     };
-    expect(() => completeReducer(reducerDescription)).toThrow(new Error('Primary actions must be a string array'));
+    expect(() => completeReducer(reducerDescription)).toThrow(
+      new Error('Primary actions must be a string array')
+    );
   });
   it('Extends correctly the primary actions', () => {
     const reducerDescription = {
@@ -59,7 +65,11 @@ describe('completeReducer', () => {
     expect(setUp.state.target).toBe(42);
 
     // onFailure behavior
-    setUp.state = reducer(setUp.state, { type: '@NAMESPACE/ACTION_FAILURE', target: 'target', payload: 'Oops !' });
+    setUp.state = reducer(setUp.state, {
+      type: '@NAMESPACE/ACTION_FAILURE',
+      target: 'target',
+      payload: 'Oops !'
+    });
     expect(setUp.state.targetLoading).toBe(false);
     expect(setUp.state.targetError).toBe('Oops !');
     expect(setUp.state.target).toBe(42);
@@ -73,9 +83,17 @@ describe('completeReducer', () => {
       }
     };
     const reducer = createReducer(setUp.state, completeReducer(reducerDescription));
-    setUp.state = reducer(setUp.state, { type: '@NAMESPACE/ACTION_FAILURE', target: 'target', payload: { message: 'ERror MACro' } });
+    setUp.state = reducer(setUp.state, {
+      type: '@NAMESPACE/ACTION_FAILURE',
+      target: 'target',
+      payload: { message: 'ERror MACro' }
+    });
     expect(setUp.state.targetError).toBe('ERror MACro');
-    setUp.state = reducer(setUp.state, { type: '@NAMESPACE/ANOTHER', target: 'target', payload: 'Also known as Ermac' });
+    setUp.state = reducer(setUp.state, {
+      type: '@NAMESPACE/ANOTHER',
+      target: 'target',
+      payload: 'Also known as Ermac'
+    });
     expect(setUp.state.targetError).toBe('Also known as Ermac');
     // Flawless victory
   });
@@ -84,7 +102,11 @@ describe('completeReducer', () => {
       modalActions: ['@NAMESPACE/MODAL']
     };
     const reducer = createReducer(setUp.state, completeReducer(reducerDescription));
-    const modal = createModalActions({ type: '@NAMESPACE/MODAL', target: 'modalIsOpen', contentTarget: 'modalContent' });
+    const modal = createModalActions({
+      type: '@NAMESPACE/MODAL',
+      target: 'modalIsOpen',
+      contentTarget: 'modalContent'
+    });
     setUp.state = reducer(setUp.state, modal.open('Title'));
     expect(setUp.state.modalIsOpen).toBe(true);
     expect(setUp.state.modalContent).toBe('Title');
