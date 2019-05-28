@@ -51,10 +51,10 @@ describe('onDeleteByIndex', () => {
       '@@ACTION/DELETE': onDeleteByIndex()
     });
     // A missing value, wrongCalculatedIndexUseOnDeleteInstead will be -1
-    const wrongCalculatedIndexUseOnDeleteInstead = setUp.state.aTarget.indexOf(5);
+    const wrongIndexDeleteInstead = setUp.state.aTarget.indexOf(5);
     const newState = reducer(setUp.state, {
       type: '@@ACTION/DELETE',
-      payload: wrongCalculatedIndexUseOnDeleteInstead,
+      payload: wrongIndexDeleteInstead,
       target: 'aTarget'
     });
     expect(newState.aTarget).toEqual(setUp.state.aTarget);

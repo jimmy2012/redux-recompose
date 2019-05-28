@@ -4,8 +4,8 @@ import createTypes from '../../creators/createTypes';
 import withFlowDetermination from '.';
 
 const MockService = {
-  fetchSomething: async () => new Promise(resolve => resolve({ ok: true, data: 42 })),
-  fetchFailureNotFound: async () =>
+  fetchSomething: () => new Promise(resolve => resolve({ ok: true, data: 42 })),
+  fetchFailureNotFound: () =>
     new Promise(resolve =>
       resolve({
         ok: false,

@@ -7,6 +7,8 @@ module.exports = {
     'no-async-promise-executor': 'on',
     'no-misleading-character-class': 'on',
     'require-atomic-updates' : 'on',
-    'max-classes-per-file' : 'on'
+    'max-classes-per-file' : 'on',
+    'no-magic-numbers': 'off',
+    'new-cap': 'off'
   }
 };
